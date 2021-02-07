@@ -19,7 +19,7 @@
         @foreach($product->ideas as $idea)
             <div class="mb-6">
                 <div class="flex flex-row items-center justify-between p-4">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col w-1/2">
                         <a wire:click="navigateTo({{ $idea->getKey() }})" class="cursor-pointer text-5xl font-bold tracking-wide text-gradient bg-gradient-to-r from-cp-pink to-cp-purple">{{ $idea->title }}</a>
                     </div>
                     <div>
