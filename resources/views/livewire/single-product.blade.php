@@ -24,7 +24,12 @@
                     </div>
                     <div>
                         <div class="flex mr-4 rounded-md inline-flex pr-4 flex-row bg-cp-purple items-center uppercase text-xs tracking-wide font-semibold">
-                            <x-jet-button wire:click="likeThis({{ $idea->getKey() }}, 'idea')">I like this idea
+                            <x-jet-button wire:click="likeThis({{ $idea->getKey() }}, 'idea')" class="{{ $idea->liked ? 'bg-cp-blue text-cp-dark-blue' : null }}">
+                                @if( $idea->liked )
+                                    Unlike this idea
+                                @else
+                                    I like this idea
+                                @endif
                                 <svg class="ml-3 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

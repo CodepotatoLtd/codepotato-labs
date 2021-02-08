@@ -9,19 +9,34 @@ class Idea extends Model
 {
     use HasFactory;
 
-    public function product(){
+    protected $appends = ['liked'];
+
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function votes(){
+    public function votes()
+    {
         return $this->morphMany(Vote::class, 'item');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(IdeaSubscription::class);
+    }
+
+    public function getLikedAttribute(){
+        return $this->votes()->where('user_id', auth()->user()->getKey())->first() instanceof Vote;
     }
 }
