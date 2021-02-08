@@ -43,7 +43,7 @@ class FixMissingSubs extends Command
         $votes = Vote::get();
         foreach( $votes as $vote ){
             $sub = new IdeaSubscription();
-            $sub->idea_id = $vote->idea_id;
+            $sub->idea_id = $vote->item_id;
             $sub->user_id = $vote->user_id;
             $sub->save();
         }
