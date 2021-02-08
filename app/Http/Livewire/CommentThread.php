@@ -35,9 +35,9 @@ class CommentThread extends Component
         $this->idea->comments[] = $comment;
 
         foreach ($this->idea->subscriptions as $subscription) {
-//            if ($comment->user_id !== $subscription->user_id) {
+            if ($comment->user_id !== $subscription->user_id) {
                 $subscription->user->notify(new NewCommentAdded($this->idea, $comment));
-//            }
+            }
         }
     }
 }
