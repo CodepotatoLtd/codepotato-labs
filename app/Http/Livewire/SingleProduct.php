@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Idea;
+use App\Models\IdeaSubscription;
 use App\Models\Product;
 use App\Models\Vote;
 use Livewire\Component;
@@ -71,6 +72,13 @@ class SingleProduct extends Component
         $vote->item_type = $model === 'idea' ? Idea::class : Product::class;
         $vote->user_id = auth()->user()->getKey();
         $vote->save();
+
+        if( $idea ) {
+            $sub = new IdeaSubscription();
+            $sub->idea_id = $item;
+            $sub->user_id = auth()->user()->getKey();
+            $sub->save();
+        }
 
         $this->hydrate();
 

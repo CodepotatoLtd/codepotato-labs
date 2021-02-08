@@ -53,11 +53,12 @@ class SingleIdea extends Component
         $vote->user_id = auth()->user()->getKey();
         $vote->save();
 
-        if( $idea )
-        $sub = new IdeaSubscription();
-        $sub->idea_id = $item;
-        $sub->user_id = auth()->user()->getKey();
-        $sub->save();
+        if( $idea ) {
+            $sub = new IdeaSubscription();
+            $sub->idea_id = $item;
+            $sub->user_id = auth()->user()->getKey();
+            $sub->save();
+        }
 
         $this->hydrate();
 
