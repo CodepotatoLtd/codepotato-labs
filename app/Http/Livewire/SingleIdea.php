@@ -62,4 +62,15 @@ class SingleIdea extends Component
 
     }
 
+    public function toggleSubscribed(Idea $idea){
+        if( $idea->subscribed ){
+            $remove = IdeaSubscription::where('user_id', auth()->user()->getKey())->where('idea_id', $idea->getKey())->delete();
+        } else {
+            $sub = new IdeaSubscription();
+            $sub->user_id = auth()->user()->getKey();
+            $sub->idea_id = $idea->getKey();
+            $sub->save();
+        }
+    }
+
 }

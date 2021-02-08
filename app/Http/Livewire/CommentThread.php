@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Comment;
 use App\Models\Idea;
+use App\Notifications\NewCommentAdded;
 use Livewire\Component;
 
 class CommentThread extends Component
@@ -12,7 +13,8 @@ class CommentThread extends Component
     public $idea;
     public $newMessage;
 
-    public function mount(Idea $idea){
+    public function mount(Idea $idea)
+    {
         $this->idea = $idea;
     }
 
@@ -21,7 +23,8 @@ class CommentThread extends Component
         return view('livewire.comment-thread');
     }
 
-    public function saveNewMessage(){
+    public function saveNewMessage()
+    {
         $comment = new Comment();
         $comment->user_id = auth()->user()->getKey();
         $comment->idea_id = $this->idea->getKey();
@@ -30,5 +33,11 @@ class CommentThread extends Component
 
         $this->newMessage = null;
         $this->idea->comments[] = $comment;
+
+        foreach ($this->idea->subscriptions as $subscription) {
+//            if ($comment->user_id !== $subscription->user_id) {
+                $subscription->user->notify(new NewCommentAdded($this->idea, $comment));
+//            }
+        }
     }
 }

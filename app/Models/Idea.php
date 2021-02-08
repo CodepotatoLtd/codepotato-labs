@@ -9,7 +9,7 @@ class Idea extends Model
 {
     use HasFactory;
 
-    protected $appends = ['liked'];
+    protected $appends = ['liked', 'subscribed'];
 
     public function product()
     {
@@ -38,5 +38,9 @@ class Idea extends Model
 
     public function getLikedAttribute(){
         return $this->votes()->where('user_id', auth()->user()->getKey())->first() instanceof Vote;
+    }
+
+    public function getSubscribedAttribute(){
+        return $this->subscriptions()->where('user_id', auth()->user()->getKey())->first() instanceof IdeaSubscription;
     }
 }

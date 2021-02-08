@@ -16,12 +16,13 @@
     <div class="flex flex-row justify-between items-center">
         <div
             class="mt-6 flex rounded-md inline-flex pr-4 flex-row bg-cp-purple items-center uppercase text-xs tracking-wide font-semibold">
-            <x-jet-button wire:click="likeThis({{ $idea->getKey() }}, 'idea')" class="{{ $idea->liked ? 'bg-cp-blue text-cp-dark-blue' : null }}">
+            <x-jet-button wire:click="likeThis({{ $idea->getKey() }}, 'idea')"
+                          class="{{ $idea->liked ? 'bg-cp-blue text-cp-dark-blue' : null }}">
                 @if( $idea->liked )
                     Unlike this idea
                 @else
                     I like this idea
-                    @endif
+                @endif
                 <svg class="ml-3 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,7 +31,20 @@
             </x-jet-button>
             <span class="pl-4">{{ count($idea->votes) }} votes so far</span>
         </div>
-        <x-jet-button>Subscribe</x-jet-button>
+        <x-jet-button wire:click="toggleSubscribed({{ $idea->getKey() }})">
+
+            <svg class="w-4 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+            </svg>
+
+            @if($idea->subscribed)
+                Unsubscribe to updates
+            @else
+                Subscribe to updates
+            @endif
+        </x-jet-button>
     </div>
 
 
