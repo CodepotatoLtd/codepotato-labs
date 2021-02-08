@@ -5,7 +5,7 @@
     @if( count($idea->comments) > 0 )
         <div class="grid grid-cols-1 gap-6">
             @foreach( $idea->comments as $comment )
-                <div class="bg-cp-panel-blue p-6 text-xl rounded-lg">
+                <div class="{{ $comment->own_comment ? 'bg-cp-purple' : 'bg-cp-panel-blue'  }} p-6 text-xl rounded-lg">
                     <span class="block mb-3 text-sm tracking-wide opacity-50">{{ $comment->user->name }} said:</span>
                     <span class="leading-normal">{{ $comment->comment }}</span>
                 </div>
