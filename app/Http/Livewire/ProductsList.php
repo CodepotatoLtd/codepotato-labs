@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\NewProductAdded;
 use Livewire\Component;
 
 class ProductsList extends Component
@@ -31,6 +33,11 @@ class ProductsList extends Component
         $this->products[] = $product;
 
         $this->newName = null;
+
+        $users = User::get();
+        foreach( $users as $user ){
+            $user->notify(new NewProductAdded($product));
+        }
 
         return redirect()->route('product.show', [$product->getKey()]);
     }
