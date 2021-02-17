@@ -1,14 +1,14 @@
 <div class="py-12">
 
-{{--    <div class="border border-gray-700 p-8 rounded-xl mb-8">--}}
-{{--        <form wire:submit.prevent="addNewProduct">--}}
-{{--            <div class="mb-4">--}}
-{{--                <label for="new_title" class="block mb-3">New product name</label>--}}
-{{--                <input type="text" wire:model="newName" class="bg-transparent w-full text-3xl p-4" placeholder="New product name, e.g. Income Reconciliation Tool">--}}
-{{--            </div>--}}
-{{--            <x-jet-button type="submit">Suggest new product</x-jet-button>--}}
-{{--        </form>--}}
-{{--    </div>--}}
+    <div class="border border-gray-700 p-8 rounded-xl mb-8">
+        <form wire:submit.prevent="addNewProduct">
+            <div class="mb-4">
+                <label for="new_title" class="block mb-3">New product name</label>
+                <input type="text" wire:model="newName" class="bg-transparent w-full text-3xl p-4" placeholder="New product name, e.g. Income Reconciliation Tool">
+            </div>
+            <x-jet-button type="submit">Suggest new product</x-jet-button>
+        </form>
+    </div>
 
     <div class="bg-cp-panel-blue p-6 rounded-md text-white font-semibold">
         <h2 class="text-2xl font-bold mb-4">🎉 Thanks for joining our little community</h2>
